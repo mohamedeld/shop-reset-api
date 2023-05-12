@@ -8,3 +8,6 @@ module.exports.signin = async (req) => {
   response.user = user;
   return response;
 };
+module.exports.signup = (req) => {
+  return userRepo.signup(req.body);
+};
