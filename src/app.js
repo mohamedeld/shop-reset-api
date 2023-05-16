@@ -6,8 +6,9 @@ const app = express();
 // Start app routes
 const userRoutes = require("./interfaces/routes/user.routes");
 const productRoutes = require("./interfaces/routes/product.routes");
-const notFoundRoute = require("./interfaces/middlewares/not-found.mw");
-const errorRoute = require("./interfaces/middlewares/error.mw");
+// Start app middlewares
+const notFoundMW = require("./interfaces/middlewares/not-found.mw");
+const errorMW = require("./interfaces/middlewares/error.mw");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,6 +16,6 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(userRoutes);
 app.use(productRoutes);
-app.use(notFoundRoute);
-app.use(errorRoute);
+app.use(notFoundMW);
+app.use(errorMW);
 module.exports = app;
