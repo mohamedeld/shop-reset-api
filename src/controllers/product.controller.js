@@ -22,30 +22,15 @@ const { uploadImage } = require(path.join(
   "utils",
   "upload-img.util"
 ));
-
-exports.addNewProduct = async (req, res, next) => {
-  let newProduct = new ProductModel({
-    title: req.body.title,
-    brand: req.body.brand,
-    description: req.body.description,
-    material: req.body.material,
-    price: req.body.price,
-    stockCount: req.body.stockCount,
-    discount: req.body.discount,
-    category: req.body.category,
-    subCategory: req.body.subCategory,
-    details: req.body.details,
-    onModel: req.body.onModel,
-  });
-  try {
-    let result = await newProduct.save();
-    res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
+const productService = require("../core/services/product.service");
+exports.createOne = (req, res, next) => {
+  productService
+    .createOne(req.body)
+    .then((product) => {
+      res.status(200).json({ message: "product created", product });
+    })
+    .catch((err) => next(err));
 };
-
-exports.updateProduct = () => {};
 
 exports.uploadProductImg = async (req, res, next) => {
   const image = req.file;

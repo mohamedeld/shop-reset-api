@@ -10,7 +10,7 @@ const fileFilter = (req, file, callBack) => {
     callBack(null, false);
   }
 };
-const fileStorage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
     callBack(null, "images");
   },
@@ -19,6 +19,6 @@ const fileStorage = multer.diskStorage({
   },
 });
 module.exports = multer({
-  storage: fileStorage,
-  fileFilter: fileFilter,
-}).single("image");
+  storage,
+  fileFilter,
+});

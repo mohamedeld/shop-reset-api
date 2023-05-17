@@ -21,35 +21,22 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    // colors: {
-    //   type: [String],
-    //   required: true,
-    // }, //ToDo adding color needs stockCount for every color || different product for every color.
-    // material: { type: String, required: true }, // In details I think (What about food or Elc ...etc)
     price: {
       type: Number,
       required: true,
     },
     stockCount: { type: Number, required: true, min: 0 },
     discount: discountSchema,
-    thumbnail: String,
+    thumbnails: [String],
     image: String,
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
-    category: { type: Schema.Types.ObjectId, ref: "Category" },
-    subCategory: { type: Schema.Types.ObjectId, ref: "SubCategory" },
-    details: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      refPath: "onModel",
+    reviews: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Review" }],
       default: null,
     },
-    onModel: {
-      type: String,
-      required: true,
-      enum: ["Furniture", "Electronic", "Clothes"],
-    },
+    category: { type: Schema.Types.ObjectId, ref: "Category" },
+    subCategory: { type: Schema.Types.ObjectId, ref: "SubCategory" },
   },
-  { timeseries: true /*, toJSON: { vir }*/ } // error
+  { timeseries: true, toJSON: { virtual: true } } // error
 );
 productSchema.virtual("priceAfterDiscount").get(function () {
   let { price, discount } = this;

@@ -1,7 +1,11 @@
 const path = require("path");
 const express = require("express");
-const multerMW = require(path.join(__dirname, "..", "middlewares", "multer.mw"));
-const { param, body } = require("express-validator");
+const multerMW = require(path.join(
+  __dirname,
+  "..",
+  "middlewares",
+  "multer.mw"
+));
 const productController = require(path.join(
   __dirname,
   "..",
@@ -9,14 +13,17 @@ const productController = require(path.join(
   "controllers",
   "product.controller"
 ));
+const productFilesMw = multerMW.fields([
+  {
+    name: "image",
+    maxCount: 1,
+  },
+  {
+    name: "thumbnails",
+    maxCount: 5,
+  },
+]);
 const router = express.Router();
+router.route("/product").post(productFilesMw, productController.createOne);
 
-router
-  .route("/product")
-  .post(productController.addNewProduct)
-//   .put(productController.updateProduct);
-router
-  .route("/product/uploadImg")
-  .post(multerMW, productController.uploadProductImg);
-// router.route("/product/:id").get(productController.getProductDetails);
 module.exports = router;
