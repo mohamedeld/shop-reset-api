@@ -6,15 +6,24 @@ const app = express();
 // Start app routes
 const userRoutes = require("./interfaces/routes/user.routes");
 const productRoutes = require("./interfaces/routes/product.routes");
+<<<<<<< HEAD
 // Start app middlewares
 const notFoundMW = require("./interfaces/middlewares/not-found.mw");
 const errorMW = require("./interfaces/middlewares/error.mw");
+=======
+const categoryRoutes = require("./interfaces/routes/category.routes");
+const subcategoryRoutes = require("./interfaces/routes/subcategory.routes");
+const notFoundRoute = require("./interfaces/middlewares/not-found.mw");
+const errorRoute = require("./interfaces/middlewares/error.mw");
+>>>>>>> 76e1742d9f2f44726aaa7e1884e68b25d612f8ac
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 app.use(userRoutes);
+app.use(categoryRoutes);
+app.use(subcategoryRoutes);
 app.use(productRoutes);
 app.use(notFoundMW);
 app.use(errorMW);
