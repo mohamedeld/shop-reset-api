@@ -21,11 +21,11 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    colors: {
-      type: [String],
-      required: true,
-    },
-    material: { type: String, required: true },
+    // colors: {
+    //   type: [String],
+    //   required: true,
+    // }, //ToDo adding color needs stockCount for every color || different product for every color.
+    // material: { type: String, required: true }, // In details I think (What about food or Elc ...etc)
     price: {
       type: Number,
       required: true,
@@ -33,7 +33,7 @@ const productSchema = new Schema(
     stockCount: { type: Number, required: true, min: 0 },
     discount: discountSchema,
     thumbnail: String,
-    images: [String],
+    image: String,
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     subCategory: { type: Schema.Types.ObjectId, ref: "SubCategory" },
@@ -49,7 +49,7 @@ const productSchema = new Schema(
       enum: ["Furniture", "Electronic", "Clothes"],
     },
   },
-  { timeseries: true, toJSON: { vir } }
+  { timeseries: true /*, toJSON: { vir }*/ } // error
 );
 productSchema.virtual("priceAfterDiscount").get(function () {
   let { price, discount } = this;
