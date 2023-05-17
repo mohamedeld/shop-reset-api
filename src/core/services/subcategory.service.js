@@ -6,9 +6,6 @@ const {
   getOne,
 } = require("../repositories/subcategory.repostiory.js");
 
-// module.exports.addSubCategory = (req) => {
-//   return subcategoryRepo.addSubCategory(req.body);
-// };
 module.exports.getAll = () => getAll();
 module.exports.createOne = (subcategory) => createOne(subcategory);
 module.exports.updateOne = (id, data) => {
