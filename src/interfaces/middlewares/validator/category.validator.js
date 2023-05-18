@@ -13,14 +13,12 @@ module.exports.addCategory = [
     .notEmpty()
     .withMessage("name cant be empty")
     .isAlpha()
-    .withMessage("name must be string")
-    .optional(),
+    .withMessage("name must be string"),
   body("description")
     .notEmpty()
     .withMessage("description cant be empty")
     .isString()
-    .withMessage("description must be string")
-    .optional(),
+    .withMessage("description must be string"),
   body("subCategory"),
 ];
 
