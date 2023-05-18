@@ -1,3 +1,6 @@
+const mongoose = require("mongoose");
+const Category = mongoose.model("Category");
+
 const {
   getAll,
   createOne,
@@ -44,6 +47,12 @@ module.exports.getOne = (req, res, next) => {
 };
 module.exports.deleteOne = (req, res, next) => {
   deleteOne(req.params["id"])
+    .then((object) => {
+      return Category.updateOne(
+        { subCategory: req.params.id },
+        { $pull: { subCategory: req.params.id } }
+      );
+    })
     .then((subcategory) => {
       res.status(200).json({
         message: "delete a subcategory",
