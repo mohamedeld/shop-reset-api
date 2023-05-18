@@ -11,6 +11,8 @@ const notFoundMW = require("./interfaces/middlewares/not-found.mw");
 const errorMW = require("./interfaces/middlewares/error.mw");
 const categoryRoutes = require("./interfaces/routes/category.routes");
 const subcategoryRoutes = require("./interfaces/routes/subcategory.routes");
+const reviewRoutes = require("./interfaces/routes/review.routes");
+
 const notFoundRoute = require("./interfaces/middlewares/not-found.mw");
 const errorRoute = require("./interfaces/middlewares/error.mw");
 
@@ -21,6 +23,7 @@ app.use(cors());
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(subcategoryRoutes);
+app.use("/reviews",reviewRoutes);
 app.use(productRoutes);
 app.use(notFoundMW);
 app.use(errorMW);
