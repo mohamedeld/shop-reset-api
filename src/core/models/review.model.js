@@ -6,7 +6,7 @@ const reviewSchema = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
-  rating: { type: Number, required: true, min: 1, max: 5 },
+  rating: { type: Number, required: true, min: [1,"min rating value is 1"], max: [5,"max rating value is 5"] },
   comment: { type: String, required: true },
 });
 
